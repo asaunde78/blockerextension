@@ -1,0 +1,19 @@
+{
+    "name": "Images Redirect For Google Scraping",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "Blocks all non searched images and redirects searched images",
+    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>","tabs"],
+    "background": {
+      "scripts": ["background.js"]
+      
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "run_at": "document_start"
+      }
+    ]
+  }
+  
