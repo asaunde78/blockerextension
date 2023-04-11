@@ -3,7 +3,7 @@
     "version": "1.0",
     "manifest_version": 2,
     "description": "Blocks all non searched images and redirects searched images",
-    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>","tabs","cookies","webNavigation"],
+    "permissions": ["webRequest", "webRequestBlocking", "<all_urls>","tabs","background","activeTab"],
     "background": {
       "scripts": ["background.js"]
       

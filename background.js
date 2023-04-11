@@ -1,4 +1,5 @@
-let links = [];
+let links = {};
+
 
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
@@ -15,12 +16,18 @@ chrome.webRequest.onBeforeRequest.addListener(
         if(!details.url.includes("googleusercontent.com") && !details.url.includes("favicon") && !details.url.includes("gstatic") &&  !details.url.includes("google.com")) {
           console.log(`${JSON.stringify(details)}`)
         }
-        
+        if (details.tabId in links) {
+          links[details.tabId] += 1;
+        }
+        else {
+          links[details.tabId] = 1;
+        }
         console.log(`Redirecting: \turl: ${details.url}`);
-        
-        links.push(details.url)
-        console.log(links.length)
-        console.log(document)
+        console.log(details)
+        chrome.tabs.executeScript(details.tabId,{
+          code: `document.documentElement.appendChild(Object.assign(document.createElement("div"), {id: "link_count${links[details.tabId]}"}));`
+        });
+        console.log(links)
         // chrome.cookies.getAll({ url: url }, function(cookies) {
         //   console.log(cookies);
         // });
