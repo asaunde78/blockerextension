@@ -73,6 +73,9 @@ chrome.webRequest.onHeadersReceived.addListener(
       // console.log("Response body:", resp);
       if(resp == "inline; filename=bad.png") {
         //potentially add a clear here so when the thread finishes getting everything we know to stop trying 
+        
+        delete links[details.tabId];
+          
         console.log("bad");
       }
       if(resp == "inline; filename=good.png") {
